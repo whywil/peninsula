@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail, Code, Palette, Zap, Users } from 'lucide-react';
+import { useState, useEffect } from 'react';
+// import { Menu, X, Github, Linkedin, Mail, Code, Palette, Zap, Users } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import FileExplorer from './FileExplorer';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,6 +38,7 @@ function App() {
 
   return (
     <div className="app">
+     
       {/* Navigation */}
       <nav className="nav">
         <div className="nav-container">
@@ -106,18 +109,15 @@ function App() {
       </section>
 
       {/* About Section */}
-      <section id="store" className="section about">
+      <section id="store" className="section store">
         <div className="container">
-          <h2 className="section-title">File Storage</h2>
-          <div className="store-content">
-            <div className="store-text">
- 
-            </div>
-          
-          </div>
+    
+            <FileExplorer />
+      
         </div>
       </section>
 
+          
 
 
 
