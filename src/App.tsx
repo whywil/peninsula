@@ -1,7 +1,7 @@
+/* WILLIAM WHYTE FOR PENINSULA INTERVIEW TASK */
 import { useState, useEffect } from 'react';
-// import { Menu, X, Github, Linkedin, Mail, Code, Palette, Zap, Users } from 'lucide-react';
 import { Menu, X } from 'lucide-react';
-import FileExplorer from './FileExplorer';
+import DocumentExplorer from './DocumentExplorer';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -92,7 +92,7 @@ function App() {
                 className="btn btn-primary"
                 onClick={() => scrollToSection('store')}
               >
-                View Store Contents
+                View Uploaded Documents
               </button>
               {/* <button 
                 className="btn btn-secondary"
@@ -112,7 +112,7 @@ function App() {
       <section id="store" className="section store">
         <div className="container">
     
-            <FileExplorer />
+            <DocumentExplorer />
       
         </div>
       </section>

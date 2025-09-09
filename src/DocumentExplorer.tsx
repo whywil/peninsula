@@ -1,23 +1,24 @@
+/* WILLIAM WHYTE FOR PENINSULA INTERVIEW TASK */
 import React, { useState } from 'react';
 import { ChevronDown, ChevronRight, File, Folder, FileText, Video } from 'lucide-react';
+// Made use of Tailwind CSS and the Lucide open-source icon library.
 
-
-// Type definitions
+// File type definitions
 interface FileItem {
   type: 'pdf' | 'doc' | 'csv' | 'mov';
   name: string;
   added: string;
 }
-
+// Define the structure for a folder item containing multiple files
 interface FolderItem {
   type: 'folder';
   name: string;
   files: FileItem[];
 }
-
+// Union type representing either a file or a folder item
 type Item = FileItem | FolderItem;
 
-// Sample data
+// Sample data supplied to me. Not making any changes to this. (Same as in data.json, but embedded here for convenience.)
 const fileData: Item[] = [
   {
     "type": "pdf",
@@ -68,10 +69,17 @@ const fileData: Item[] = [
   }
 ];
 
+// Main React component rendering the document explorer UI
 const DocumentExplorer: React.FC = () => {
+
+  // State to track which folders are expanded (using folder names)
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set());
 
-  // Toggle folder expansion
+   /*
+   * Toggle expansion state of a folder by name.
+   * Adds/removes folder name from the expandedFolders set.
+   */
+
   const toggleFolder = (folderName: string) => {
     const newExpanded = new Set(expandedFolders);
     if (newExpanded.has(folderName)) {
@@ -82,7 +90,7 @@ const DocumentExplorer: React.FC = () => {
     setExpandedFolders(newExpanded);
   };
 
-  // Get appropriate icon for file type
+  // Get appropriate icon for file type. Icon sizes & styles are set by iconProps. Tailwind CSS classes.
   const getFileIcon = (type: string) => {
     const iconProps = { size: 16, className: "mr-2" };
     
@@ -100,17 +108,17 @@ const DocumentExplorer: React.FC = () => {
     }
   };
 
-  // Format date for display
+  // Format date display to "DD MMM YYYY" Irish locale.
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
+    return date.toLocaleDateString('en-IE', {
       year: 'numeric',
       month: 'short',
       day: 'numeric'
     });
   };
 
-  // Render a file item
+  // Render a single file item. Indentation level (level) for nested display.
   const renderFile = (file: FileItem, level: number = 0) => (
     <div
       key={`${file.name}-${file.added}`}
@@ -122,7 +130,7 @@ const DocumentExplorer: React.FC = () => {
         {getFileIcon(file.type)}
         <span className="font-medium text-gray-800">{file.name}</span>
         <span className="ml-2 px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded uppercase">
-          {file.type}
+          {file.type} {/* File type label */}
         </span>
       </div>
       <div className="text-sm text-gray-500">
@@ -131,18 +139,24 @@ const DocumentExplorer: React.FC = () => {
     </div>
   );
 
-  // Render a folder item
+  /*
+   * Renders a folder item in the UI.
+   * Displays folder name, expands/collapses on click, and shows contained files.
+   * Indentation (level) for nested display.
+   */
   const renderFolder = (folder: FolderItem, level: number = 0) => {
     const isExpanded = expandedFolders.has(folder.name);
     
     return (
       <div key={folder.name}>
+          {/* Folder header clickable to toggle expansion */}
         <div
           className={`flex items-center justify-between p-2 border-b border-gray-200 hover:bg-blue-50 cursor-pointer ${
             level > 0 ? 'ml-6 border-l-2 border-gray-300 pl-4' : ''
           }`}
           onClick={() => toggleFolder(folder.name)}
         >
+          {/* Chevron icon showing expanded vs collapsed based on boolean isExpanded. */}
           <div className="flex items-center flex-1">
             {isExpanded ? (
               <ChevronDown size={16} className="mr-2 text-gray-600" />
@@ -160,6 +174,7 @@ const DocumentExplorer: React.FC = () => {
           </div>
         </div>
         
+         {/* Render files inside folder only if expanded. */}
         {isExpanded && (
           <div className="bg-gray-50">
             {folder.files.map(file => renderFile(file, level + 1))}
@@ -169,9 +184,10 @@ const DocumentExplorer: React.FC = () => {
     );
   };
 
+  // Component render with overall layout and legend.
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">File Explorer</h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">Document Storage Explorer</h1>
       
       <div className="bg-white border border-gray-300 rounded-lg shadow-sm overflow-hidden">
         <div className="bg-gray-100 px-4 py-3 border-b border-gray-300">
