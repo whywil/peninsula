@@ -94,12 +94,7 @@ function App() {
               >
                 View Uploaded Documents
               </button>
-              {/* <button 
-                className="btn btn-secondary"
-                onClick={() => scrollToSection('services')}
-              >
-                View Work
-              </button> */}
+        
             </div>
           </div>
           <div className="hero-image">
@@ -109,16 +104,12 @@ function App() {
       </section>
 
       {/* About Section */}
-      <section id="store" className="section store">
+   
+      <section id="store" className="hero">
         <div className="container">
-    
             <DocumentExplorer />
-      
         </div>
       </section>
-
-          
-
 
 
       {/* Footer */}

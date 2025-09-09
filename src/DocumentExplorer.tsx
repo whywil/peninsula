@@ -1,7 +1,7 @@
 /* WILLIAM WHYTE FOR PENINSULA INTERVIEW TASK */
 import React, { useState } from 'react';
 import { ChevronDown, ChevronRight, File, Folder, FileText, Video } from 'lucide-react';
-import data from './data.json'; // Assuming data.json is in the same directory
+import data from './data.json';
 // Made use of Tailwind CSS and the Lucide open-source icon library.
 
 // File type definitions
@@ -20,8 +20,10 @@ interface FolderItem {
 type Item = FileItem | FolderItem;
 
 // Importing sample data supplied to me. Not making any changes to this.
-// Cast or map the imported data to ensure correct typing for TypeScript.
+// Cast the imported data to ensure correct typing for TypeScript.
 const fileData: Item[] = data as Item[];
+// const fileData: Item[] = [...]; //Note for embedded scenario.
+
 
 // Main React component rendering the document explorer UI
 const DocumentExplorer: React.FC = () => {
@@ -111,15 +113,15 @@ const getFileIcon = (type: string) => {
           onClick={() => toggleFolder(folder.name)}
         >
           {/* Chevron icon showing expanded vs collapsed based on boolean isExpanded. */}
-          <div className="flex items-center flex-1">
+          <div className="flex items-center flex-1 z-10">
             {isExpanded ? (
               <ChevronDown size={16} className="mr-2 text-gray-600" />
             ) : (
               <ChevronRight size={16} className="mr-2 text-gray-600" />
             )}
-            <Folder size={16} className="mr-2 text-yellow-600" />
-            <span className="font-medium text-gray-800">{folder.name}</span>
-            <span className="ml-2 px-2 py-1 text-xs bg-blue-100 text-blue-600 rounded">
+            <Folder size={16} className="mr-2 text-yellow-600 z-10" />
+            <span className="font-medium text-gray-800 z-10">{folder.name}</span>
+            <span className="ml-2 px-2 py-1 text-xs bg-blue-100 text-blue-600 rounded z-10">
               FOLDER (Clickable)
             </span>
           </div>
