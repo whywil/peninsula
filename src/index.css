@@ -193,24 +193,22 @@ body {
 }
 
 .hero-avatar {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
+  background-color: #ffffff;
+  background-image: url('./peninsula-logo.svg');
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   border-radius: 50%;
   position: relative;
   animation: float 2s ease-in-out infinite;
 }
 
-.hero-avatar::before {
-  content: '';
-  position: absolute;
-  inset: 10px;
-  background: white;
-  border-radius: 50%;
-}
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-40px); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1rem); }
 }
 
 /* Buttons */

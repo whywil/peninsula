@@ -43,7 +43,7 @@ function App() {
       <nav className="nav">
         <div className="nav-container">
           <div className="nav-logo">
-            <p>William Whyte</p>
+            <p className='text-xl font-normal'>William Whyte</p>
           </div>
           
           <div className={`nav-menu ${isMenuOpen ? 'nav-menu-open' : ''}`}>
