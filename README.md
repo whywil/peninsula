@@ -40,4 +40,12 @@ This is a fully functional, extensible file explorer UI. It may be ideal as a co
 6) Click the button:
    >View Uploaded Documents
    
+### Testing
+Using Jest, runs the following test:
+`DocumentExplorer.perf.test.tsx`
+This runs 2 performance tests, checking component rendering and the folders opening/closing performance.
 
+    1) renders within acceptable time (within 100ms)
+    2) handles multiple folder expansions efficiently (within 80ms)
+    
+    
