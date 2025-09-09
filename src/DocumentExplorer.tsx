@@ -1,6 +1,7 @@
 /* WILLIAM WHYTE FOR PENINSULA INTERVIEW TASK */
 import React, { useState } from 'react';
 import { ChevronDown, ChevronRight, File, Folder, FileText, Video } from 'lucide-react';
+import data from './data.json'; // Assuming data.json is in the same directory
 // Made use of Tailwind CSS and the Lucide open-source icon library.
 
 // File type definitions
@@ -18,81 +19,34 @@ interface FolderItem {
 // Union type representing either a file or a folder item
 type Item = FileItem | FolderItem;
 
-// Sample data supplied to me. Not making any changes to this. (Same as in data.json, but embedded here for convenience.)
-const fileData: Item[] = [
-  {
-    "type": "pdf",
-    "name": "Employee Handbook",
-    "added": "2017-01-06"
-  },
-  {
-    "type": "pdf",
-    "name": "Public Holiday policy",
-    "added": "2016-12-06"
-  },
-  {
-    "type": "folder",
-    "name": "Expenses",
-    "files": [
-      {
-        "type": "doc",
-        "name": "Expenses claim form",
-        "added": "2017-05-02"
-      },
-      {
-        "type": "doc",
-        "name": "Fuel allowances",
-        "added": "2017-05-03"
-      }
-    ]
-  },
-  {
-    "type": "csv",
-    "name": "Cost centres",
-    "added": "2016-08-12"
-  },
-  {
-    "type": "folder",
-    "name": "Misc",
-    "files": [
-      {
-        "type": "doc",
-        "name": "Christmas party",
-        "added": "2017-12-02"
-      },
-      {
-        "type": "mov",
-        "name": "Welcome to the company!",
-        "added": "2015-04-24"
-      }
-    ]
-  }
-];
+// Importing sample data supplied to me. Not making any changes to this.
+// Cast or map the imported data to ensure correct typing for TypeScript.
+const fileData: Item[] = data as Item[];
 
 // Main React component rendering the document explorer UI
 const DocumentExplorer: React.FC = () => {
 
-  // State to track which folders are expanded (using folder names)
-  const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set());
+// State to track which folders are expanded (using folder names)
+const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set());
 
-   /*
-   * Toggle expansion state of a folder by name.
-   * Adds/removes folder name from the expandedFolders set.
-   */
+  /*
+  * Toggle expansion state of a folder by name.
+  * Adds/removes folder name from the expandedFolders set.
+  */
 
-  const toggleFolder = (folderName: string) => {
-    const newExpanded = new Set(expandedFolders);
-    if (newExpanded.has(folderName)) {
-      newExpanded.delete(folderName);
-    } else {
-      newExpanded.add(folderName);
-    }
-    setExpandedFolders(newExpanded);
-  };
+const toggleFolder = (folderName: string) => {
+  const newExpanded = new Set(expandedFolders);
+  if (newExpanded.has(folderName)) {
+    newExpanded.delete(folderName);
+  } else {
+    newExpanded.add(folderName);
+  }
+  setExpandedFolders(newExpanded);
+};
 
-  // Get appropriate icon for file type. Icon sizes & styles are set by iconProps. Tailwind CSS classes.
-  const getFileIcon = (type: string) => {
-    const iconProps = { size: 16, className: "mr-2" };
+// Get appropriate icon for file type. Icon sizes & styles are set by iconProps. Tailwind CSS classes.
+const getFileIcon = (type: string) => {
+  const iconProps = { size: 16, className: "mr-2" };
     
     switch (type) {
       case 'pdf':
@@ -184,11 +138,12 @@ const DocumentExplorer: React.FC = () => {
     );
   };
 
-  // Component render with overall layout and legend.
+  // The overall layout and legend.
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Document Storage Explorer</h1>
       
+       {/* Container for file/folder list */}
       <div className="bg-white border border-gray-300 rounded-lg shadow-sm overflow-hidden">
         <div className="bg-gray-100 px-4 py-3 border-b border-gray-300">
           <div className="flex justify-between text-sm font-semibold text-gray-700">
@@ -206,8 +161,9 @@ const DocumentExplorer: React.FC = () => {
             }
           })}
         </div>
-      </div>
+      </div>  {/* End of Container */}
 
+      {/* Legend explaining icons and colors */}
       <div className="mt-6 p-4 bg-gray-50 rounded-lg">
         <h3 className="font-semibold text-gray-800 mb-2">Legend:</h3>
         <div className="grid grid-cols-2 gap-4 text-sm">
