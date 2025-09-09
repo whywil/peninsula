@@ -102,7 +102,7 @@ const getFileIcon = (type: string) => {
    */
   const renderFolder = (folder: FolderItem, level: number = 0) => {
     const isExpanded = expandedFolders.has(folder.name);
-    
+
     return (
       <div key={folder.name}>
           {/* Folder header clickable to toggle expansion */}
