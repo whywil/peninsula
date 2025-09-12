@@ -21,7 +21,7 @@ describe('DocumentExplorer Performance', () => {
     const start = performance.now();
     
     // Expand all folders
-    const folders = screen.getAllByText(/FOLDER \(Clickable\)/);
+    const folders = screen.getAllByText('FOLDER');
     folders.forEach((folder: Element) => {
       const clickableElement = folder.closest('.cursor-pointer');
       if (clickableElement) fireEvent.click(clickableElement);

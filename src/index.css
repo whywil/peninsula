@@ -98,6 +98,13 @@ body {
   color: var(--primary-color);
 }
 
+#sortButton {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
 .nav-menu a.active::after {
   content: '';
   position: absolute;
